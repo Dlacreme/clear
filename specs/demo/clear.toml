@@ -1,0 +1,25 @@
+[app]
+name    = "Demo"
+version = "0.1"
+main    = "./src/clear_demo.clr"
+secret  = "secretkeyrandomized"
+
+[authors]
+  [authors.dlacreme]
+  name  = "Dlacreme"
+  email = "dlacreme@gmail.com"
+
+[hosting]
+port  = 4242
+
+[database]
+addon     = "postgresql"
+host      = "localhost"
+port      = 5432
+database  = "clear_demo"
+user      = "clear"
+password  = "clear"
+
+[interpreter]
+language  = "python"
+bin       = "/usr/bin/python3.8"

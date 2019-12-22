@@ -1,0 +1,3 @@
+
+p "Hello " // Print text
+pl "World" // Print a line followed by a `\n`
