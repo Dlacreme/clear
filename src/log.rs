@@ -20,8 +20,6 @@ where D: Display {
     }
 }
 
-/* Not sure those will be useful one day */
-
 // pub fn warn<D>(message: D)
 // where D: Display {
 //     println!("Warning! : {}", message)

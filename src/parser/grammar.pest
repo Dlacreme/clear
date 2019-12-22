@@ -9,7 +9,13 @@ number = { (ASCII_DIGIT | ".")+ }
 
 // // Functions
 args = { (string | number)* }
-func = { ASCII_ALPHA ~ "(" ~ (string|number)* ~ ")" }
+
+libfuncnames = {
+    "print" |
+    "puts"
+}
+
+libfunc = { libfuncnames ~ "(" ~ (string|number)* ~ ")" }
 
 // Source File
 
@@ -17,6 +23,6 @@ my_newline = { (comment ~ NEWLINE | NEWLINE) }
 
 file = {
     SOI ~
-    ((comment|func)? ~ my_newline)* ~
+    ((comment|libfunc)? ~ my_newline)* ~
     EOI
 }
