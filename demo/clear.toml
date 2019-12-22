@@ -1,9 +1,9 @@
 [app]
 name    = "Demo"
-version = "0.1"
-main    = "./src/clear_demo.clr"
+version = 0.1
 secret  = "secretkeyrandomized"
 authors = ["Mathieu D. <dlacreme@gmail.com>"]
+target    = "./src/clear_demo.clr"
 
 [hosting]
 port  = 4242

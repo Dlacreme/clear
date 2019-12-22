@@ -5,6 +5,7 @@ const PACKAGE_VERSION: &'static str = env!("CARGO_PKG_VERSION");
 const PACKAGE_AUTHORS: &'static str = env!("CARGO_PKG_AUTHORS");
 
 mod log;
+mod config;
 mod clear;
 
 fn main() {
@@ -32,7 +33,8 @@ fn main() {
     };
 
     if let Some(input_filename) = matches.value_of("input_filename") {
-        clear::build_app(input_filename);
+        clear::build_app(config::Config::load_from_file(input_filename)
+            .expect("Fail to read config file")); // TO-DO: provide clear explanation about the failture
     } else {
         app.print_help().unwrap();
     }

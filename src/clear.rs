@@ -1,4 +1,5 @@
+use crate::config::Config;
 
-pub fn build_app(input_filename: &str) {
-    crate::log::log(format!("Starting to build {}...", input_filename));
+pub fn build_app(config: Config) {
+    crate::log::log(format!("Starting to build {}...", config.app.target));
 }
