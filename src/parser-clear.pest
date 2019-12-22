@@ -1,4 +1,7 @@
-comment = { " #" ~ (ASCII_ALPHA | ASCII_DIGIT | " ")}
+// PEST feature to automaticaly skip whitespaces
+WHITESPACE = _{ " " }
+
+comment = { "#" ~ (ASCII_ALPHA | ASCII_DIGIT | ".")* }
 // Types
 quote = { "\""|"'" }
 string = { quote ~ (ASCII_ALPHA | ASCII_DIGIT | " ")+ ~ quote }
@@ -10,10 +13,10 @@ func = { ASCII_ALPHA ~ "(" ~ (string|number)* ~ ")" }
 
 // Source File
 
-my_newline = { comment? ~ (NEWLINE) }
+my_newline = { (comment ~ NEWLINE | NEWLINE) }
 
 file = {
     SOI ~
-    ((func)? ~ my_newline)* ~
+    ((comment|func)? ~ my_newline)* ~
     EOI
 }
