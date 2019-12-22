@@ -1,3 +1,12 @@
-field = { (ASCII_DIGIT | "." | "-")+ }
-record = { field ~ ("," ~ field)* }
-file = { SOI ~ (record ~ ("\r\n" | "\n"))* ~ EOI }
+// Types
+quote = { "\""|"'" }
+string = { quote ~ (ASCII_ALPHA | ASCII_DIGIT)+ ~ quote }
+number = { (ASCII_DIGIT | ".")+ }
+
+// // Functions
+args = { (string | number)* }
+func = { ASCII_ALPHA ~ "(" ~ (string|number)* ~ ")" }
+// func = { ASCII_ALPHA }
+
+// Source File
+file = { SOI ~ (func ~ ("\r\n" | "\n"))* ~ EOI }

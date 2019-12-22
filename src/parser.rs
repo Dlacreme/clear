@@ -10,8 +10,9 @@ pub fn parse_file(filename: &str) -> Vec<ast::Node> {
     let raw_file_content = std::fs::read_to_string(filename).expect(format!("Cannot read file {}", filename).as_str());
     let parsed_file_content = SourceFile::parse(Rule::file, &raw_file_content).expect(format!("Failed to parse file {}", filename).as_str())
         .next().unwrap(); // ;doc says it never fails...
-    for record in parsed_file_content.into_inner() {
-        let ast_node = match_rules_to_ast_node(record);
+
+    for pair in parsed_file_content.into_inner() {
+        let ast_node = match_rules_to_ast_node(pair);
         if ast_node.is_some() {
             ast.push(ast_node.unwrap());
         }
@@ -19,9 +20,13 @@ pub fn parse_file(filename: &str) -> Vec<ast::Node> {
     ast
 }
 
-fn match_rules_to_ast_node(record: pest::iterators::Pair<'_, Rule>) -> Option<ast::Node> {
-    match record.as_rule() {
-
+fn match_rules_to_ast_node(pair: pest::iterators::Pair<'_, Rule>) -> Option<ast::Node> {
+    match pair.as_rule() {
+        Rule::func => {
+            println!("THIS IS A FUNCTION YES!!");
+            None
+        },
         _ => None,
     }
 }
+
