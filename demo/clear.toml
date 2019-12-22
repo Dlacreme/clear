@@ -3,11 +3,7 @@ name    = "Demo"
 version = "0.1"
 main    = "./src/clear_demo.clr"
 secret  = "secretkeyrandomized"
-
-[authors]
-  [authors.dlacreme]
-  name  = "Dlacreme"
-  email = "dlacreme@gmail.com"
+authors = ["Mathieu D. <dlacreme@gmail.com>"]
 
 [hosting]
 port  = 4242
