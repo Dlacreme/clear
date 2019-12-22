@@ -1,12 +1,16 @@
+#[macro_use] extern crate pest_derive;
+
 use clap::{App, Arg};
 
 const PACKAGE_NAME: &'static str = env!("CARGO_PKG_NAME");
 const PACKAGE_VERSION: &'static str = env!("CARGO_PKG_VERSION");
 const PACKAGE_AUTHORS: &'static str = env!("CARGO_PKG_AUTHORS");
 
-mod log;
+#[macro_use] mod log;
 mod config;
 mod clear;
+mod parser;
+mod ast;
 
 fn main() {
     let mut app = App::new(PACKAGE_NAME)
@@ -34,7 +38,7 @@ fn main() {
 
     if let Some(input_filename) = matches.value_of("input_filename") {
         clear::build_app(config::Config::load_from_file(input_filename)
-            .expect("Fail to read config file")); // TO-DO: provide clear explanation about the failture
+            .expect("Fail to read config file")); // TODO: provide clear explanation about the failture
     } else {
         app.print_help().unwrap();
     }
