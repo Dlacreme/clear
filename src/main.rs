@@ -11,6 +11,7 @@ mod config;
 mod clear;
 mod parser;
 mod ast;
+mod gen;
 
 fn main() {
     let mut app = App::new(PACKAGE_NAME)
