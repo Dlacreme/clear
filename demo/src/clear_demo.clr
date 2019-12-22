@@ -1,1 +1,1 @@
-pl "bite"
+p("Hello World")

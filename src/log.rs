@@ -27,7 +27,7 @@ where D: Display {
 //     println!("Warning! : {}", message)
 // }
 
-// pub fn error<D>(message: D)
-// where D: Display {
-//     println!("!Error! : {}", message)
-// }
+pub fn error<D>(message: D)
+where D: Display {
+    println!("!Error! : {}", message)
+}

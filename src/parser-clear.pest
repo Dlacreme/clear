@@ -1,12 +1,19 @@
+comment = { " #" ~ (ASCII_ALPHA | ASCII_DIGIT | " ")}
 // Types
 quote = { "\""|"'" }
-string = { quote ~ (ASCII_ALPHA | ASCII_DIGIT)+ ~ quote }
+string = { quote ~ (ASCII_ALPHA | ASCII_DIGIT | " ")+ ~ quote }
 number = { (ASCII_DIGIT | ".")+ }
 
 // // Functions
 args = { (string | number)* }
 func = { ASCII_ALPHA ~ "(" ~ (string|number)* ~ ")" }
-// func = { ASCII_ALPHA }
 
 // Source File
-file = { SOI ~ (func ~ ("\r\n" | "\n"))* ~ EOI }
+
+my_newline = { comment? ~ (NEWLINE) }
+
+file = {
+    SOI ~
+    ((func)? ~ my_newline)* ~
+    EOI
+}
