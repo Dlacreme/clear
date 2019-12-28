@@ -13,3 +13,4 @@ regex = "1.3.1" # Because regexp
 toml = "0.5.5" # User to read the Clear.toml config file
 pest = "2.1.2" # Used to parse Clear code
 pest_derive = "2.1.0" # Used to parse Clear code
+llvm-sys = "90" # we use LLVM to build our binary

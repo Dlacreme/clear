@@ -6,9 +6,9 @@ use crate::log;
 #[grammar = "parser/grammar.pest"]
 pub struct SourceFile;
 
-pub fn parse_file(filename: &str) -> Vec<ast::Node> {
+pub fn parse_file(filename: String) -> Vec<ast::Node> {
     let mut ast: Vec<ast::Node> = vec!();
-    let raw_file_content = std::fs::read_to_string(filename).expect(format!("Cannot read file {}", filename).as_str());
+    let raw_file_content = std::fs::read_to_string(&filename).expect(format!("Cannot read file {}", filename).as_str());
     let mut index = 0;
     match SourceFile::parse(Rule::file, &raw_file_content) {
         Ok(mut next) => {
@@ -23,21 +23,21 @@ pub fn parse_file(filename: &str) -> Vec<ast::Node> {
             }
         },
         Err(_) => {
-            crate::log::error(format!("Could not parse {}", filename));
+            crate::log::error(format!("Error in {} line {}", filename, index));
             std::process::exit(-2);
         }
     }
     ast
 }
 
-fn match_rules_to_ast_node(pair: pest::iterators::Pair<'_, Rule>, index: i32) -> Option<ast::Node> {
+fn match_rules_to_ast_node<'a>(pair: pest::iterators::Pair<'_, Rule>, index: i32) -> Option<ast::Node> {
     match pair.as_rule() {
-        Rule::libfunc => Some(libfunc(pair.into_inner())),
+        Rule::libfunc => Some(libfunc(pair.into_inner(), index)),
         _ => None,
     }
 }
 
-fn libfunc(pairs: pest::iterators::Pairs<'_, Rule>) -> ast::Node {
+fn libfunc(pairs: pest::iterators::Pairs<'_, Rule>, index: i32) -> ast::Node {
     let mut func_name: &str = "";
     let mut params: Vec<String> = vec!();
     for pair in pairs {
@@ -55,5 +55,5 @@ fn libfunc(pairs: pest::iterators::Pairs<'_, Rule>) -> ast::Node {
         log::error("Invalid lib function call");
         std::process::exit(-3);
     }
-    ast::Node::libfunc(String::from(func_name), params, String::from("dqwdq"), 1, 2)
+    ast::Node::libfunc(String::from(func_name), params, index, 1)
 }

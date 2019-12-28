@@ -5,12 +5,12 @@ use crate::gen;
 
 pub fn build_app(config: Config) {
     crate::log::log(format!("Starting to build {}...", config.app.target));
-    let mut ast: Vec<ast::Node> = vec!();
-    ast = read_and_parse(ast, config.app.target.as_str());
-    gen::gen_code(ast);
+    let mut tree: ast::Tree = ast::Tree::new();
+    tree = read_and_parse(tree, config.app.target);
+    gen::gen_code(tree.nodes);
 }
 
-fn read_and_parse(mut ast: Vec<ast::Node>, filename: &str) -> Vec<ast::Node> {
-    ast.append(&mut parser::parse_file(filename));
-    ast
+fn read_and_parse(mut tree: ast::Tree, filename: String) -> ast::Tree {
+    tree.append_nodes(parser::parse_file(filename));
+    tree
 }
