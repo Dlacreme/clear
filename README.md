@@ -1,4 +1,4 @@
-# Clear Language Compiler
+# Language Compiler
 
 Clear is a language dedicated to build modern Web Application.
 
