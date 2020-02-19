@@ -1,6 +1,6 @@
 # Language Compiler
 
-Clear is a language dedicated to build modern Web Application.
+Small compiler
 
 ## Development
 
